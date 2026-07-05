@@ -1,0 +1,24 @@
+# Secrets and credentials
+.env
+credentials.json
+token.json
+
+# Local Python caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Local data & temporary caches
+data/raw_inputs/*
+!data/raw_inputs/.gitkeep
+data/cache/*
+!data/cache/.gitkeep
+.streamlit/
+
+# Environment / OS
+.DS_Store
+.venv/
+build/
+dist/
+*.egg-info/
