@@ -35,7 +35,7 @@ def extract_event_from_source(
     
     # We will use gemini-2.5-flash as the default since it's fast, multimodal, and cheap/free tier
     # Falling back to gemini-1.5-flash if needed
-    model = genai.GenerativeModel("gemini-1.5-flash")
+    model = genai.GenerativeModel("gemini-2.5-flash")
     
     # Prepare system prompt with current context
     current_date_str = datetime.now().strftime("%A, %B %d, %Y")
