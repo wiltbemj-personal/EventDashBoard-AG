@@ -19,6 +19,46 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+# --- PASSWORD PROTECTION GATE ---
+def check_password() -> bool:
+    """Returns True if the user has entered the correct password, or if no password is set."""
+    target_password = getattr(config, "DASHBOARD_PASSWORD", "")
+    if not target_password:
+        return True
+
+    def password_entered():
+        if st.session_state["pwd_input"] == target_password:
+            st.session_state["pwd_correct"] = True
+        else:
+            st.session_state["pwd_correct"] = False
+
+    if st.session_state.get("pwd_correct", False):
+        return True
+
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
+        st.write("")
+        st.write("")
+        st.write("")
+        with st.container(border=True):
+            st.markdown("### 🔐 EventDashBoard Authentication")
+            st.markdown("This dashboard is private. Please enter the access password to view events.")
+            st.text_input(
+                "Access Password",
+                type="password",
+                on_change=password_entered,
+                key="pwd_input",
+                placeholder="Enter password"
+            )
+            if "pwd_correct" in st.session_state and not st.session_state["pwd_correct"]:
+                st.error("😕 Incorrect password. Please try again.")
+            st.caption("You can configure this password in your `.env` or Streamlit Cloud Secrets under `DASHBOARD_PASSWORD`.")
+    return False
+
+if not check_password():
+    st.stop()
+
+
 # Premium SaaS Custom CSS Injection
 st.markdown("""
 <style>

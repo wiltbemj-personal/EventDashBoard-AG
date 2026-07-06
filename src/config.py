@@ -25,6 +25,7 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
 DRIVE_FOLDER_NAME = os.getenv("DRIVE_FOLDER_NAME", "Event Dashboard Intake")
 GMAIL_LABEL = os.getenv("GMAIL_LABEL", "Events")
 SPREADSHEET_NAME = os.getenv("SPREADSHEET_NAME", "Event Dashboard DB")
+DASHBOARD_PASSWORD = os.getenv("DASHBOARD_PASSWORD", "")
 
 # Load configuration and write credential files from Streamlit Secrets if available
 try:
@@ -38,6 +39,8 @@ try:
             GMAIL_LABEL = st.secrets["GMAIL_LABEL"]
         if "SPREADSHEET_NAME" in st.secrets:
             SPREADSHEET_NAME = st.secrets["SPREADSHEET_NAME"]
+        if "DASHBOARD_PASSWORD" in st.secrets:
+            DASHBOARD_PASSWORD = st.secrets["DASHBOARD_PASSWORD"]
             
         if "CREDENTIALS_JSON_CONTENT" in st.secrets and not CREDENTIALS_JSON_PATH.exists():
             with open(CREDENTIALS_JSON_PATH, "w") as f:
