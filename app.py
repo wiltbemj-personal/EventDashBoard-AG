@@ -448,7 +448,7 @@ with st.expander("➕ Quick Add Source File / Web URL / Text"):
                             text_content=raw_text,
                             mime_type="text/plain"
                         )
-                        source_id = f"manual_txt_{uuid.uuid4()[:8]}"
+                        source_id = f"manual_txt_{str(uuid.uuid4())[:8]}"
                         event = ingest.format_event(extraction, "Web Link", source_id)
                         
                         # Add to Google Sheets
@@ -496,7 +496,7 @@ with st.expander("➕ Quick Add Source File / Web URL / Text"):
                                 text_content=f"Source URL: {web_url}\n\nWebsite Content:\n{page_text}",
                                 mime_type="text/plain"
                             )
-                            source_id = f"manual_url_{uuid.uuid4()[:8]}"
+                            source_id = f"manual_url_{str(uuid.uuid4())[:8]}"
                             event = ingest.format_event(extraction, "Web Link", source_id, web_url)
                             
                             # Save
