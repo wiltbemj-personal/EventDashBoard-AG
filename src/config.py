@@ -46,8 +46,9 @@ try:
         if "TOKEN_JSON_CONTENT" in st.secrets and not TOKEN_JSON_PATH.exists():
             with open(TOKEN_JSON_PATH, "w") as f:
                 f.write(st.secrets["TOKEN_JSON_CONTENT"])
-except Exception:
-    pass
+except Exception as e:
+    import sys
+    print(f"DEBUG: Error loading secrets in config.py: {e}", file=sys.stderr)
 
 def has_gemini_key() -> bool:
     return bool(GEMINI_API_KEY)

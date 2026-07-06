@@ -172,6 +172,20 @@ with st.sidebar:
         st.info("Google Workspace: **Local Only Mode**")
         st.caption("Add `credentials.json` to project folder to connect Gmail/Drive.")
 
+    # Secrets Debug Expansion
+    with st.sidebar.expander("🛠️ Secrets Diagnostic Panel"):
+        st.write("Credentials file exists:", config.CREDENTIALS_JSON_PATH.exists())
+        st.write("Token file exists:", config.TOKEN_JSON_PATH.exists())
+        try:
+            if hasattr(st, "secrets") and st.secrets:
+                st.write("Secrets keys detected:", list(st.secrets.keys()))
+                for k in ["GEMINI_API_KEY", "CREDENTIALS_JSON_CONTENT", "TOKEN_JSON_CONTENT"]:
+                    st.write(f"- `{k}` present:", k in st.secrets)
+            else:
+                st.write("st.secrets is empty/unavailable.")
+        except Exception as err:
+            st.write("Secrets error:", str(err))
+
     st.divider()
 
     # 2. Synchronize Trigger
