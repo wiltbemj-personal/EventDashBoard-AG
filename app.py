@@ -329,19 +329,6 @@ else:
 
     st.divider()
 
-    # 2. Main Timeline Graph (Quick overview)
-    st.subheader("📅 Event Distribution Timeline")
-    timeline_df = upcoming_events.copy()
-    if not timeline_df.empty:
-        # Group by week or month to visualize
-        timeline_df["Week"] = timeline_df["Date_Parsed"].dt.to_period("W").dt.to_timestamp()
-        weeks_chart = timeline_df.groupby("Week").size().reset_index(name="Count")
-        st.area_chart(weeks_chart.set_index("Week")["Count"], height=160, color="#2563eb")
-    else:
-        st.info("No upcoming events to display on the timeline. Adjust dates or add new events!")
-
-    st.divider()
-
     # 3. Interactive Filters and Search
     st.subheader("🔍 Filter & Explore Events")
     
